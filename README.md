@@ -1,5 +1,7 @@
 # Fintual Interview Project
 
+[![codecov](https://codecov.io/gh/nschmidtg/fintual/branch/main/graph/badge.svg)](https://codecov.io/gh/nschmidtg/fintual)
+
 This project is a solution to the Fintual interview challenge.
 
 ## Description

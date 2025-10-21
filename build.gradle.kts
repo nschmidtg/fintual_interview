@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.10"
     id("com.diffplug.spotless") version "6.7.2"
+    jacoco
 }
 
 group = "com.nschmidtg"
@@ -42,6 +43,35 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(true)
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
+    dependsOn(tasks.jacocoTestCoverageVerification)
+}
+
 kotlin {
     jvmToolchain(21)
 }
