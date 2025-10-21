@@ -8,7 +8,6 @@ The project is a Kotlin application that helps to rebalance a portfolio of inves
 It defines a target portfolio with a set of instruments and their desired weights.
 The application then calculates the necessary trades to rebalance the portfolio to match the target.
 
-
 ### Key Assumptions
 
 - There could be multiple strategies to rebalance a portfolio, this implementation focuses on two: Fractional and Whole Units.
@@ -38,7 +37,6 @@ The application then calculates the necessary trades to rebalance the portfolio 
 ### Links to LLMs conversations
 - [Initial Discovery](https://gemini.google.com/share/2488a9e34ea2)
 - [System Design](https://chatgpt.com/share/68f7f5e9-6be8-8012-b5cf-393cb8a1f0f9)
-
 
 ## Running the tests
 
