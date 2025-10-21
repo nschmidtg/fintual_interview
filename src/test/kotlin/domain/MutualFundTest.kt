@@ -1,14 +1,14 @@
 package domain
 
-import com.nschmidtg.domain.Crypto
 import com.nschmidtg.domain.FractionalUnitsStrategy
+import com.nschmidtg.domain.MutualFund
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class CryptoTest {
+class MutualFundTest {
 
     val fractionalUnitsStrategy: FractionalUnitsStrategy = mock(FractionalUnitsStrategy::class.java)
 
@@ -20,7 +20,7 @@ class CryptoTest {
         whenever(fractionalUnitsStrategy.calculateTargetQuantity(inputTargetValue, inputCurrentPrice))
             .thenReturn(Result.success(expected))
 
-        val stock = Crypto(inputCurrentPrice, "Test Crypto", "TST", fractionalUnitsStrategy)
+        val stock = MutualFund(inputCurrentPrice, "Test Crypto", "TST", fractionalUnitsStrategy)
 
         val result = stock.calculateTargetQuantity(inputTargetValue)
 
