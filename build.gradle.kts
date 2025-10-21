@@ -12,8 +12,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.mockito:mockito-core:5.2.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:5.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.0.0")
 }
 tasks.test {
     useJUnitPlatform()
@@ -26,7 +25,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         target("src/**/*.kt")
         ktfmt().googleStyle().configure {
-            it.setMaxWidth(80)
+            it.setMaxWidth(120)
             it.setBlockIndent(4)
             it.setContinuationIndent(4)
             it.setRemoveUnusedImport(true)

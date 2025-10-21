@@ -8,9 +8,6 @@ abstract class Instrument(
 ) {
 
     fun calculateTargetQuantity(targetValue: Double): Result<Double> {
-        return quantityStrategy.calculateTargetQuantity(
-            targetValue,
-            currentPrice
-        )
+        return quantityStrategy.calculateTargetQuantity(targetValue, currentPrice)
     }
 }

@@ -7,22 +7,20 @@ import com.nschmidtg.domain.TargetPortfolio
 
 class PortfolioBalanceService {
 
-    fun balance(
-        portfolio: Portfolio,
-        target: TargetPortfolio
-    ): List<TradeOrderDto> {
-        val totalValue: Double = portfolio.calculateTotalValue()
-        return target.targetAllocations.map {
-            (targetInstrument: Instrument, desiredPercentage: Double) ->
-            val desiredValue = totalValue * desiredPercentage
-            val targetQuantity =
-                targetInstrument
-                    .calculateTargetQuantity(desiredValue)
-                    .getOrThrow()
-            val currentQuantity =
-                portfolio.holdings.getOrDefault(targetInstrument, 0.0)
-            val amountToTrade = targetQuantity - currentQuantity
-            TradeOrderDto(targetInstrument, amountToTrade)
-        }
+    fun balance(portfolio: Portfolio, target: TargetPortfolio): Set<TradeOrderDto> {
+        if (target.targetAllocations.isEmpty()) throw RuntimeException("TargetPortfolio cannot be empty")
+        val totalPortfolioValue: Double = portfolio.calculateTotalValue()
+        if (totalPortfolioValue == 0.0) throw RuntimeException("Cannot balance if portfolio value is zero")
+        return target.targetAllocations
+            .map { (targetInstrument: Instrument, targetInstrumentPercentage: Double) ->
+                val desiredValueForCurrentInstrument = totalPortfolioValue * targetInstrumentPercentage
+                val targetQuantity =
+                    targetInstrument.calculateTargetQuantity(desiredValueForCurrentInstrument).getOrThrow()
+                val currentQuantity = portfolio.getHoldingQuantityByInstrument(targetInstrument)
+                val amountToTrade = targetQuantity - currentQuantity // negative -> sell, positive -> buy
+
+                TradeOrderDto(targetInstrument, amountToTrade)
+            }
+            .toSet()
     }
 }
