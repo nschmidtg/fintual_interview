@@ -31,4 +31,23 @@ class TradingServiceTest {
         assertEquals(2.0, newPortfolio.getHoldingQuantityByInstrument(instrument2))
         assertEquals(0.0, freeCash)
     }
+
+    @Test
+    fun processTradeOperations_whenInstrumentNotInCurrentHoldings_shouldHandleCorrectly() {
+        val instrument1 = mock(Instrument::class.java)
+        val instrument2 = mock(Instrument::class.java)
+
+        val tradeOrders = setOf(TradeOrderDto(instrument1, -1.0), TradeOrderDto(instrument2, 1.0))
+
+        val initialPortfolio = Portfolio(hashMapOf(instrument1 to 2.0))
+
+        whenever(instrument1.currentPrice).thenReturn(1.0)
+        whenever(instrument2.currentPrice).thenReturn(1.0)
+
+        val (newPortfolio, freeCash) = service.processTradeOperations(tradeOrders, initialPortfolio)
+
+        assertEquals(1.0, newPortfolio.getHoldingQuantityByInstrument(instrument1))
+        assertEquals(1.0, newPortfolio.getHoldingQuantityByInstrument(instrument2))
+        assertEquals(0.0, freeCash)
+    }
 }

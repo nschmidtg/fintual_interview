@@ -9,7 +9,7 @@ class TradingService {
         val newPortfolio = currentPortfolio.copy()
         var freeCash = 0.0
         tradeOrders.forEach { tradeOrder ->
-            currentPortfolio.holdings[tradeOrder.instrument]?.let { oldQuantity ->
+            currentPortfolio.holdings.getOrDefault(tradeOrder.instrument, 0.0).let { oldQuantity ->
                 val action = if (tradeOrder.quantity < 0) "Selling" else "Buying"
                 val newQuantity = oldQuantity + tradeOrder.quantity
                 val valueToTrade = "%.2f".format(tradeOrder.quantity * tradeOrder.instrument.currentPrice)
