@@ -1,12 +1,13 @@
 package com.nschmidtg.application.services
 
 import com.nschmidtg.application.dtos.TradeOrderDto
+import com.nschmidtg.domain.Instrument
 import com.nschmidtg.domain.Portfolio
 
 class TradingService {
 
     fun processTradeOperations(tradeOrders: Set<TradeOrderDto>, currentPortfolio: Portfolio): Pair<Portfolio, Double> {
-        val newPortfolio = currentPortfolio.copy()
+        val newPortfolio = Portfolio(hashMapOf<Instrument, Double>())
         var freeCash = 0.0
         tradeOrders.forEach { tradeOrder ->
             currentPortfolio.holdings.getOrDefault(tradeOrder.instrument, 0.0).let { oldQuantity ->
@@ -16,7 +17,9 @@ class TradingService {
                 println(
                     "Instrument: ${tradeOrder.instrument.symbol}, Current Quantity: $oldQuantity, $action Quantity: ${tradeOrder.quantity}. Value to trade $$valueToTrade. New Quantity: $newQuantity. New Instrument Value: $${newQuantity * tradeOrder.instrument.currentPrice}"
                 )
-                newPortfolio.holdings[tradeOrder.instrument] = oldQuantity + tradeOrder.quantity
+                val newTotalQuantity = oldQuantity + tradeOrder.quantity
+                if (newTotalQuantity > 0)
+                    newPortfolio.holdings[tradeOrder.instrument] = oldQuantity + tradeOrder.quantity
                 freeCash += tradeOrder.quantity * tradeOrder.instrument.currentPrice
             }
         }
