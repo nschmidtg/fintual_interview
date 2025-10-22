@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.1.10"
     id("com.diffplug.spotless") version "6.7.2"
     jacoco
+    id("org.gradle.application")
 }
 
 group = "com.nschmidtg"
@@ -90,6 +91,9 @@ kotlin {
     jvmToolchain(21)
 }
 
+application {
+    mainClass.set("com.nschmidtg.MainKt")
+}
 
 tasks.register<Test>("intTest") {
     description = "Runs integration tests."

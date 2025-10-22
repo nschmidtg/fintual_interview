@@ -44,10 +44,36 @@ The application then calculates the necessary trades to rebalance the portfolio 
 
 
 ## Running the Application
-To run the application, ensure you have Java and Gradle installed.
-Then, execute the following command:
+
+This project is a Kotlin application built with Gradle. Java Development Kit (JDK) 21 or newer**: This project is configured to use JDK 21. You can download it from [Oracle](https://www.oracle.com/java/technologies/downloads/) or use a version manager like `sdkman`.
+
+### Building the Project
 
 ```bash
+./gradlew build && ./gradlew run
+```
+
+You should be able to see the logs of the main function with a dummy example:
+
+```
+Current Holdings:
+Initial Portfolio Total Value: 3000.0
+Stock(CMPA), Quantity: 10.0, Value: $1000.00
+MutualFund(MFX), Quantity: 40.0, Value: $1000.00
+Stock(CMPB), Quantity: 20.0, Value: $1000.00
+
+Target Allocations:
+Stock(CMPA), Target Percentage: 40.0%
+Stock(CMPB), Target Percentage: 34.0%
+MutualFund(MFX), Target Percentage: 26.0%
+
+Instrument: CMPA, Current Quantity: 10.0, Buying Quantity: 2.0. Value to trade $200.00. New Quantity: 12.0. New Instrument Value: $1200.0
+Instrument: CMPB, Current Quantity: 20.0, Buying Quantity: 0.0. Value to trade $0.00. New Quantity: 20.0. New Instrument Value: $1000.0
+Instrument: MFX, Current Quantity: 40.0, Selling Quantity: -8.8. Value to trade $-220.00. New Quantity: 31.2. New Instrument Value: $780.0
+
+Final Portfolio Total Value: 2980.0 with Free Cash: $20.00.
+```
+
 
 ## Running the tests
 

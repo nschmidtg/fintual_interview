@@ -47,6 +47,7 @@ private fun printTotalValueAndFreeCash(finalTotalValue: Double, balancedPortfoli
     println(
         "Final Portfolio Total Value: $finalTotalValue with Free Cash: $${"%.2f".format(balancedPortfolioToFreeCash.second)}."
     )
+    println()
 }
 
 private fun printTargetPortfolio(targetPortfolio: TargetPortfolio) {
@@ -54,12 +55,14 @@ private fun printTargetPortfolio(targetPortfolio: TargetPortfolio) {
     targetPortfolio.targetAllocations.forEach { (instrument, percentage) ->
         println("$instrument, Target Percentage: ${percentage * 100}%")
     }
+    println()
 }
 
 private fun printInitialPortfolio(currentPortfolio: Portfolio) {
-    println("Initial Portfolio Total Value: ${currentPortfolio.calculateTotalValue()}")
     println("Current Holdings:")
+    println("Initial Portfolio Total Value: ${currentPortfolio.calculateTotalValue()}")
     currentPortfolio.holdings.forEach { (instrument, quantity) ->
         println("$instrument, Quantity: $quantity, Value: $${"%.2f".format(quantity * instrument.currentPrice)}")
     }
+    println()
 }

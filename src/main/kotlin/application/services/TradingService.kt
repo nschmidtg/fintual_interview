@@ -20,6 +20,7 @@ class TradingService {
                 freeCash += tradeOrder.quantity * tradeOrder.instrument.currentPrice
             }
         }
+        println()
         freeCash = kotlin.math.abs(-freeCash)
 
         return Pair(newPortfolio, freeCash)
