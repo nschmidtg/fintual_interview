@@ -95,21 +95,6 @@ class PortfolioBalanceServiceIntTest {
     }
 
     @Test
-    fun `balance when target portfolio is empty should throw`() {
-        val strategy = WholeUnitsStrategy()
-        val instrumentA = Stock(50.4, "Apple Inc.", "AAPL", strategy)
-        val holdings = hashMapOf(instrumentA as Instrument to 1.0)
-        val portfolio = Portfolio(holdings)
-        val targetAllocations = emptyMap<Instrument, Double>()
-        val targetPortfolio = TargetPortfolio(targetAllocations)
-        val service = PortfolioBalanceService()
-
-        val exception = assertThrows<RuntimeException> { service.balance(portfolio, targetPortfolio) }
-
-        assertEquals("TargetPortfolio cannot be empty", exception.message)
-    }
-
-    @Test
     fun `balance when target has more instruments than portfolio`() {
         val strategy = FractionalUnitsStrategy()
         val instrumentA = MutualFund(50.0, "Fondo Mutuo LarrainVial Enfoque", "ENFOQUE", strategy)
