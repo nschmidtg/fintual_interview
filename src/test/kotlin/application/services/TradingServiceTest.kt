@@ -65,7 +65,7 @@ class TradingServiceTest {
 
         val expected = Portfolio(hashMapOf(instrument2 to 3.0))
 
-        val (newPortfolio, freeCash) = service.processTradeOperations(tradeOrders, initialPortfolio)
+        val (newPortfolio, _) = service.processTradeOperations(tradeOrders, initialPortfolio)
 
         assertEquals(expected.holdings, newPortfolio.holdings)
     }
