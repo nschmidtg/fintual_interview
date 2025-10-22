@@ -29,4 +29,14 @@ class MutualFundTest {
 
         verify(fractionalUnitsStrategy).calculateTargetQuantity(inputTargetValue, inputCurrentPrice)
     }
+
+    @Test
+    fun toString_shouldReturnCorrectFormat() {
+        val mutual = MutualFund(150.0, "Test MutualFund", "MTM", fractionalUnitsStrategy)
+        val expected = "MutualFund(MTM)"
+
+        val actual = mutual.toString()
+
+        assertEquals(expected, actual)
+    }
 }

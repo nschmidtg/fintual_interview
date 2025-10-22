@@ -4,7 +4,7 @@ import com.nschmidtg.domain.Instrument
 import com.nschmidtg.domain.Portfolio
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.kotlin.whenever
 
 class PortfolioTest {
@@ -12,7 +12,7 @@ class PortfolioTest {
     @Test
     fun calculateTotalValue_whenSingleEntry_shouldReturnCorrectValue() {
 
-        val instrument = Mockito.mock(Instrument::class.java)
+        val instrument = mock(Instrument::class.java)
         val holdings = hashMapOf(instrument to STORE_INPUT_QUANTITY_1)
         val portfolio = Portfolio(holdings)
         val expected = 150.0
@@ -27,8 +27,8 @@ class PortfolioTest {
     @Test
     fun calculateTotalValue_whenMultipleEntroes_shouldReturnCorrectValue() {
 
-        val instrument1 = Mockito.mock(Instrument::class.java)
-        val instrument2 = Mockito.mock(Instrument::class.java)
+        val instrument1 = mock(Instrument::class.java)
+        val instrument2 = mock(Instrument::class.java)
         val holdings = hashMapOf(instrument1 to STORE_INPUT_QUANTITY_1, instrument2 to STORE_INPUT_QUANTITY_2)
         val portfolio = Portfolio(holdings)
         val expected = 400.0
@@ -43,7 +43,7 @@ class PortfolioTest {
 
     @Test
     fun getHoldingQuantityByInstrument_whenInstrumentExists_shouldReturnCorrectQuantity() {
-        val instrument = Mockito.mock(Instrument::class.java)
+        val instrument = mock(Instrument::class.java)
         val holdings = hashMapOf(instrument to STORE_INPUT_QUANTITY_1)
         val portfolio = Portfolio(holdings)
         val expected = STORE_INPUT_QUANTITY_1
@@ -55,8 +55,8 @@ class PortfolioTest {
 
     @Test
     fun getHoldingQuantityByInstrument_whenInstrumentDoesNotExist_shouldReturnZero() {
-        val instrumentStored = Mockito.mock(Instrument::class.java)
-        val instrumentQueried = Mockito.mock(Instrument::class.java)
+        val instrumentStored = mock(Instrument::class.java)
+        val instrumentQueried = mock(Instrument::class.java)
         val holdings = hashMapOf(instrumentStored to STORE_INPUT_QUANTITY_1)
         val portfolio = Portfolio(holdings)
         val expected = 0.0
