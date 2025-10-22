@@ -30,6 +30,13 @@ The application then calculates the necessary trades to rebalance the portfolio 
 - Added a Main function with a simple case with 3 investment instrument (2 stocks and 1 mutual fund) to demonstrate how the application works, along with the respective logs.
 
 
+### Some additional features
+
+- CI pipeline with GitHub Actions to run tests on every push and pull request.
+- Code coverage reporting with Codecov.
+- Code style enforcement with Spotless.
+
+
 ### Future Improvements
 - Implement more sophisticated rebalancing algorithms that take into account transaction costs, taxes, and market impact.
 - Add support for more types of financial instruments, such as bonds, ETFs, etc.
