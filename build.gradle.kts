@@ -55,6 +55,13 @@ tasks.jacocoTestReport {
         csv.required.set(false)
         html.required.set(true)
     }
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it) {
+                exclude("com/nschmidtg/Main.class", "com/nschmidtg/MainKt.class")
+            }
+        })
+    )
 }
 
 tasks.jacocoTestCoverageVerification {
@@ -65,6 +72,13 @@ tasks.jacocoTestCoverageVerification {
             }
         }
     }
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it) {
+                exclude("com/nschmidtg/Main.class", "com/nschmidtg/MainKt.class")
+            }
+        })
+    )
 }
 
 tasks.check {
