@@ -29,4 +29,14 @@ class StockTest {
 
         verify(wholeUnitsStrategy).calculateTargetQuantity(inputTargetValue, inputCurrentPrice)
     }
+
+    @Test
+    fun toString_shouldReturnCorrectFormat() {
+        val stock = Stock(150.0, "Test Stock", "TST", wholeUnitsStrategy)
+        val expected = "Stock(TST)"
+
+        val actual = stock.toString()
+
+        assertEquals(expected, actual)
+    }
 }
